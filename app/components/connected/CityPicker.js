@@ -17,6 +17,7 @@ class CityPicker extends React.Component {
     selectCity(city) {
         localStore.setCity(city);
         this.props.actions.setCity(city);
+        this.closeModal();
     }
 
     closeModal() {
@@ -32,6 +33,14 @@ class CityPicker extends React.Component {
 
     render() {
         const cities = this.props.cities;
+        const customStyles = {
+            content : {
+              top                   : '20%',
+              left                  : '20%',
+              right                 : 'auto',
+              bottom                : '20%',
+            }
+        };
         return (
             <div className='city'>
                 <Modal
@@ -39,6 +48,7 @@ class CityPicker extends React.Component {
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     ariaHideApp={false}
+                    style={customStyles}
                 >
                     <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                         <button onClick={this.closeModal} style={{ fontSize: '16px', marginLeft: '10px' }} className="button">Close</button>

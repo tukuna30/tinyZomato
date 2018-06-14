@@ -47,8 +47,14 @@
                 text-align: center
               }
               .typeahead-selector {
+                width: 500px;
                 position: absolute;
-                background: white;
+                z-index: 1;
+                top: 15px;
+                padding: 10px 0 0 10px;
+                border-radius: 5px;
+                box-shadow: 1px 1px 1px lightgrey;
+                background: #f3f3f3;
                     li {
                         margin-bottom: 10px;
                         a {
@@ -58,11 +64,12 @@
                 }
 
               .typeahead {
+                  position: relative;
                   input {
                     font-size: 16px;
-                    margin-left: 40px;
                     height: 25px;
                     width: 250px;
+                    border-radius: 1px;
                     outline: none;
                     &:focus {
                         border: 2px solid lightskyblue;

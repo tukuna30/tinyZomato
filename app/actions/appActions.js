@@ -2,10 +2,10 @@ import * as types from './actionTypes';
 
 import CaseStudyCSAPIS from '../api/caseStudyCSApis';
 
-export function loadRestaurants(id) { 
+export function loadRestaurants(id, categoryId = '1') { 
   let cityId = id || '6'; 
   return function(dispatch) {
-    return CaseStudyCSAPIS.getRestaurants(`https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&start=0&count=50&collection_id=1`).then(response => {
+    return CaseStudyCSAPIS.getRestaurants(`https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&start=0&count=50&collection_id=${categoryId}`).then(response => {
       dispatch(loadRestaurantsSuccess(response.restaurants));
     }).catch(error => {
       throw(error);
@@ -30,6 +30,12 @@ export function setCity(city) {
   }
 } 
 
+export function setCategory(category) {
+  return function(dispatch) {
+    dispatch(categorySelectionSuccess(category));
+  }
+}
+
 export function loadRestaurantsSuccess(restaurants) {  
     return {type: types.LOAD_RESTAURANTS_SUCCESS, restaurants};
 }
@@ -40,4 +46,8 @@ export function loadCitiesSuccess(cities) {
 
 export function citySelectionSuccess(city) {
   return {type: types.CITY_SELECTION_SUCCESS, city}
+}
+
+export function categorySelectionSuccess(category) {
+  return {type: types.CATEGORY_SELECTION_SUCCESS, category}
 }

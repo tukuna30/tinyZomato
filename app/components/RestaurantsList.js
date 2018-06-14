@@ -10,6 +10,7 @@ const RestaurantsList = ({restaurants, selectRestaurant}) => {
           <Restaurant restaurant={restaurant.restaurant} selectRestaurant={selectRestaurant}/>
         </li>
         )}
+        {restaurants.length === 0 && <span style={{position: 'relative', top: '200px'}}>No Restaurants Found, for your query!!!</span>}
       </ul>
   );
 };

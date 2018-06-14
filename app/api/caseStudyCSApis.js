@@ -24,6 +24,12 @@ class CaseStudyCSAPIS {
     static getCities(url) {
       return _getData(url);
     }
+    static getCuisines(url) {
+      return _getData(url);
+    }
+    static getCategories(url) {
+      return _getData(url);
+    }
 }
 
 export default CaseStudyCSAPIS;
