@@ -1,3 +1,5 @@
 export default {  
-    restaurants: []
+    restaurants: [],
+    cities: [],
+    selectedCity: {},
   }

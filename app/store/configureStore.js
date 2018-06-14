@@ -10,6 +10,6 @@ const customMiddleWare = store => next => action => {
 export default function configureStore() {  
   return createStore(
     rootReducer,
-    applyMiddleware(thunk, customMiddleWare)
+    applyMiddleware(thunk)
   );
 }

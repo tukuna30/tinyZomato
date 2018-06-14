@@ -1,5 +1,5 @@
 {
-  "name": "cs_case_study",
+  "name": "tiny_zomato",
   "version": "1.0.0",
   "description": "Case study for CS",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tukuna30/cs_case_study.git"
+    "url": "git+https://github.com/tukuna30/tinyZomato.git"
   },
   "author": "Tukuna Patro",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tukuna30/cs_case_study/issues"
+    "url": "https://github.com/tukuna30/tinyZomato/issues"
   },
-  "homepage": "https://github.com/tukuna30/cs_case_study#readme",
+  "homepage": "https://github.com/tukuna30/tinyZomato#readme",
   "dependencies": {
     "cookie": "^0.3.1",
     "prop-types": "^15.6.1",
