@@ -15,7 +15,7 @@ import Categories from '../connected/Categories';
 class LandingPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { modalIsOpen: false, restaurant: {}, restaurants: [], showCityPicker: false };
+        this.state = { modalIsOpen: false, restaurant: {}, restaurants: [], showCityPicker: false, isLoading: true };
         this.selectRestaurant = this.selectRestaurant.bind(this);
         this.showCityPicker = this.showCityPicker.bind(this);
         this.hideCityPicker = this.hideCityPicker.bind(this);
@@ -57,7 +57,7 @@ class LandingPage extends React.Component {
             if (this._isCityChanged(nextProps) || this._isCategoryChanged(nextProps)) {
                 this.props.actions.loadRestaurants(localStore.getCity().id, nextProps.selectedCategory.id);
             }
-            this.setState({ restaurants: nextProps.restaurants });
+            this.setState({ restaurants: nextProps.restaurants, isLoading: false });
         }
     }
 
@@ -65,7 +65,7 @@ class LandingPage extends React.Component {
         let filteredRestaurants = this.props.restaurants.filter((res) => {
             return parseFloat(res.restaurant.user_rating.aggregate_rating) >= parseFloat(rating);
         });
-        this.setState({ restaurants: filteredRestaurants });
+        this.setState({ restaurants: filteredRestaurants, isLoading: false });
     }
 
     sortRestaurantsList(order) {
@@ -104,7 +104,7 @@ class LandingPage extends React.Component {
                     />
                     <div style={{ padding: '10px' }}>
                         <span>{this.props.selectedCity.name || localStore.getCity().name}</span>
-                        <button onClick={this.showCityPicker}>Change Location</button>
+                        <button onClick={this.showCityPicker}>Change City</button>
                     </div>
                     <Filter onChange={this.updateRestaurantsList} />
                     <Sorter onSelection={this.sortRestaurantsList} />
@@ -113,7 +113,8 @@ class LandingPage extends React.Component {
                     </div>
 
                 </div>
-                <RestaurantsList restaurants={restaurants} selectRestaurant={this.selectRestaurant} />
+                
+                <RestaurantsList isLoading={this.state.isLoading} restaurants={restaurants} selectRestaurant={this.selectRestaurant} />
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}

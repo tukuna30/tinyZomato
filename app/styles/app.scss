@@ -76,5 +76,35 @@
                     }
                   }
               }
+
+              .left {
+                border: 1px solid lightgray;
+                box-shadow: 1px 1px 1px lightgrey;
+                background: aliceblue;
+                border-radius: 5px;
+              }
+              button {
+                background-color: #FFB733;
+                border-radius: 3px;
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+              .restaurants-container {
+                & > ul {
+                  li {
+                    &:hover {
+                      cursor: pointer;
+                    }
+                  }
+                }
+              }
+              .radio {
+                label, input {
+                  &:hover {
+                    cursor: pointer;
+                  }
+                }
+              }
      }
 }
