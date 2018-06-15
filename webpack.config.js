@@ -39,5 +39,8 @@ module.exports = {
     aggregateTimeout: 300,
     poll: 1000
   },
-  mode: 'none'
+  mode: 'none',
+  devServer: {
+    port: 3000
+  }
 };
