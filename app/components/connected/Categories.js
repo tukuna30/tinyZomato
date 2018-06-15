@@ -30,7 +30,7 @@ class Categories extends React.Component {
         return (
             <div style={{ padding: "10px" }}>
                 <ul style={{padding: '0px'}}>
-                    By Categories
+                    <div className='filter-head'>By Categories</div>
                     {categories}
                 </ul>
             </div>

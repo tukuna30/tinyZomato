@@ -15,7 +15,7 @@ class Filter extends React.Component {
     render() {
         return (
             <div style={{padding: "10px"}}>
-                <div>Filter by rating</div>
+                <div className='filter-head'>Filter by rating</div>
                 <div className="radio">
                     <label>
                         <input type="radio" value="4.5"
