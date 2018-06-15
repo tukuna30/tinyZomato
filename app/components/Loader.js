@@ -13,7 +13,7 @@ function CircularLoader(props) {
   const { classes } = props;
   return (
     <div>
-      <CircularProgress className={classes.progress} />
+      <CircularProgress className={classes.progress} color="secondary" thickness={5}/>
     </div>
   );
 }

@@ -39,7 +39,7 @@ class LandingPage extends React.Component {
     closeModal() {
         this.setState({ modalIsOpen: false });
     }
-        
+
     componentDidMount() {
         if (!this.props.restaurants.length) {
             this.props.actions.loadRestaurants(localStore.getCity().id);
@@ -55,9 +55,13 @@ class LandingPage extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.restaurants) {
             if (this._isCityChanged(nextProps) || this._isCategoryChanged(nextProps)) {
-                this.props.actions.loadRestaurants(localStore.getCity().id, nextProps.selectedCategory.id);
+                this.setState({ isLoading: true });
+                this.props.actions.loadRestaurants(localStore.getCity().id, nextProps.selectedCategory.id).then(() => {
+                    this.setState({ isLoading: false, restaurants: nextProps.restaurants });
+                });
+            } else {
+                this.setState({ restaurants: nextProps.restaurants, isLoading: false });
             }
-            this.setState({ restaurants: nextProps.restaurants, isLoading: false });
         }
     }
 
@@ -86,6 +90,9 @@ class LandingPage extends React.Component {
         const restaurants = this.state.restaurants;
         return (
             <div className='restaurants-container' style={{ display: 'flex' }}>
+                <button id='drawer' onClick={(e) => {
+                    document.querySelector('.left').classList.toggle('show');
+                }}>{'<<->>'}</button>
                 <div className='left' style={{ padding: '20px 30px' }}>
                     <Typeahead
                         options={restaurants}
@@ -109,23 +116,29 @@ class LandingPage extends React.Component {
                     <Filter onChange={this.updateRestaurantsList} />
                     <Sorter onSelection={this.sortRestaurantsList} />
                     <div>
-                        <Categories onChange={this.getRestaurantsByCuisine}/>
+                        <Categories onChange={this.getRestaurantsByCuisine} />
                     </div>
 
                 </div>
-                
-                <RestaurantsList isLoading={this.state.isLoading} restaurants={restaurants} selectRestaurant={this.selectRestaurant} />
+                <div className='right'>
+                    <RestaurantsList isLoading={this.state.isLoading} restaurants={restaurants} selectRestaurant={this.selectRestaurant} />
+                    {this.state.showCityPicker && <CityPicker onClose={this.hideCityPicker} />}
+                </div>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
                     ariaHideApp={false}
+                    style={{
+                        content: { zIndex: '2' }, overlay: {
+                            position: 'absolute'
+                        }
+                    }}
                 >
                     <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                         <button onClick={this.closeModal} style={{ fontSize: '16px', marginLeft: '10px' }} className="button">Close</button>
                     </div>
                     {this.state.restaurant.id && <RestaurantDetail restaurant={this.state.restaurant} />}
                 </Modal>
-                {this.state.showCityPicker && <CityPicker onClose={this.hideCityPicker} />}
             </div>
         );
     }

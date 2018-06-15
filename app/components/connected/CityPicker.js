@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import Modal from 'react-modal';
-import {loadCities, setCity} from '../../actions/appActions';
+import { loadCities, setCity } from '../../actions/appActions';
 let Typeahead = require('react-typeahead').Typeahead;
 import localStore from '../../store/localStore';
 
@@ -26,19 +26,23 @@ class CityPicker extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.cities.length){
-           this.props.actions.loadCities();
+        if (!this.props.cities.length) {
+            this.props.actions.loadCities();
         }
     }
 
     render() {
         const cities = this.props.cities;
         const customStyles = {
-            content : {
-              top                   : '20%',
-              left                  : '20%',
-              right                 : 'auto',
-              bottom                : '20%',
+            content: {
+                top: '20%',
+                left: '30px',
+                right: 'auto',
+                bottom: '20%',
+                zIndex: '2',
+            },
+            overlay: {
+                position: 'absolute'
             }
         };
         return (
@@ -58,6 +62,7 @@ class CityPicker extends React.Component {
                         filterOption={(inputVal, option) => {
                             return option.name.toLowerCase().indexOf(inputVal.toLowerCase()) !== -1;
                         }}
+                        customClasses={{results: 'results'}}
                         displayOption={(option) => {
                             return option.name;
                         }}
@@ -80,7 +85,7 @@ function mapStateToProps(state, ownProps) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        actions: bindActionCreators({setCity, loadCities}, dispatch)
+        actions: bindActionCreators({ setCity, loadCities }, dispatch)
     };
 }
 

@@ -1,11 +1,151 @@
-body {
-    background: #ffffff; 
-    color: #111111;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: 0;
-    font-family: verdana,arial,helvetica,sans-serif;
+  body {
+      background: #ffffff;
+      color: #111111;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: 0;
+      font-family: verdana, arial, helvetica, sans-serif;
+      ul {
+          li {
+              list-style: none;
+              margin-bottom: 2px;
+          }
+      }
+      .heart {
+          margin: 10px;
+          display: flex;
+      }
+      .main-container {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          overflow: hidden;
+      }
+      header {
+          background: #cb202d;
+          height: 50px;
+          display: flex;
+          color: white;
+      }
+      footer {
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+          z-index: 2;
+          background: white;
+          height: 20px;
+          text-align: center
+      }
+      .typeahead-selector {
+          width: 500px;
+          position: absolute;
+          z-index: 1;
+          top: 15px;
+          padding: 10px 0 0 10px;
+          border-radius: 5px;
+          box-shadow: 1px 1px 1px lightgrey;
+          background: #f3f3f3;
+          li {
+              &:hover {
+                  background: lightgrey;
+              }
+              padding-bottom: 5px;
+              margin-bottom: 5px;
+              a {
+                  text-decoration: none;
+                  color: #5359d6;
+              }
+          }
+          &.results {
+              width: 200px;
+          }
+      }
+      .typeahead {
+          position: relative;
+          input {
+              font-size: 16px;
+              height: 25px;
+              width: 250px;
+              border-radius: 1px;
+              outline: none;
+              &:focus {
+                  border: 2px solid lightskyblue;
+              }
+          }
+      }
+      .left {
+          border: 1px solid lightgray;
+          box-shadow: 1px 1px 1px lightgrey;
+          background: aliceblue;
+          border-radius: 5px;
+          max-height: 700px;
+          overflow-y: auto;
+      }
+      button {
+          background-color: #FFB733;
+          border-radius: 3px;
+          &:hover {
+              cursor: pointer;
+          }
+      }
+      .restaurants-container {
+          .right {
+              &>ul {
+                  li {
+                      &.first {
+                          margin-top: 60px;
+                      }
+                      &:hover {
+                          cursor: pointer;
+                      }
+                  }
+              }
+          }
+      }
+      .radio {
+          label,
+          input {
+              &:hover {
+                  cursor: pointer;
+              }
+          }
+      }
+      #drawer {
+          display: none;
+      }
+      @keyframes highlight {
+          0% {
+              box-shadow: 0 0 0 0px rgba(#cb202d, 1)
+          }
+          70% {
+              box-shadow: 0 0 0 10px rgba(#cb202d, 0)
+          }
+          100% {
+              box-shadow: 0 0 0 0px rgba(#cb202d, 0)
+          }
+      }
+      .list-header {
+          position: absolute;
+          z-index: 1;
+          background: white;
+          padding: 10px;
+          top: 30px;
+          min-width: 520px;
+      }
+      .results-note {
+          position: absolute;
+          top: 100px;
+          div {
+              div {
+                  left: 200px;
+                  top: 200px;
+                  position: absolute;
+              }
+          }
+      }
   }
