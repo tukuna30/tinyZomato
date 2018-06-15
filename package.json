@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server --https",
+    "start": "node server.js",
     "postinstall": "webpack --config webpack.config.js"
   },
   "repository": {
@@ -27,7 +27,8 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "express": "^4.16.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
