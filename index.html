@@ -5,6 +5,7 @@
     <title>Tiny Zomato</title>
     <style>
         body {
+            box-sizing: border-box;
             background: #ffffff;
             color: #111111;
             position: absolute;
@@ -15,26 +16,72 @@
             margin: 0;
             font-family: verdana, arial, helvetica, sans-serif;
         }
+
         header {
-          background: #cb202d;
-          height: 50px;
-          display: flex;
-          color: white;
+            background: #cb202d;
+            height: 50px;
+            display: flex;
+            color: white;
         }
+
         footer {
-          position: absolute;
-          width: 100%;
-          bottom: 0;
-          z-index: 2;
-          background: white;
-          height: 20px;
-          text-align: center
-      }
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            z-index: 2;
+            background: white;
+            height: 20px;
+            text-align: center
+        }
 
         #header span {
             top: 15px;
             position: absolute;
             left: 40px;
+        }
+        .loader-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        .loader-container.hide {
+            display: none;
+        }
+        .loader-parent {
+            position: relative;
+            width: 40px;
+            height: 40px;
+        }
+
+        .loader-parent div {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 4px solid #f50057;
+            border-radius: 50%;
+            animation: loader 1.2s cubic-bezier(0.6, 0, 0.6, 1) infinite;
+            border-color: #f50057 transparent transparent transparent;
+        }
+
+        .loader-parent div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+
+        .loader-parent div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+
+        .loader-parent div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+
+        @keyframes loader {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -44,7 +91,16 @@
         <header id="header">
             <span class='logo'>Tiny Zomato</span>
         </header>
-        <div id='react-app' class='heart' />
+        <div id='react-app' class='heart'>
+        </div>
+        <div class='loader-container'>
+                <div class='loader-parent'>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
     </div>
     <script async src="/dist/app.bundle.js"></script>
     <footer id="footer">(c) Tiny Zomato 2018</footer>

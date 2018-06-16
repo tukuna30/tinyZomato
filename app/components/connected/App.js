@@ -9,7 +9,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  componentDidMount () {
+    document.querySelector('.loader-container').classList.add('hide');
+  }
   render() {
     let selectedCityName = this.props.selectedCity.name || localStore.getCity().name;
     return (
