@@ -1,12 +1,12 @@
 const path = require('path');
-const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   devtool: 'inline-source-map',
   entry: './app/index.js',
   plugins: [
-    new webpack.DefinePlugin({
-      "APP_HOST_URL": JSON.stringify('http://localhost')
+    new UglifyJSPlugin({
+      test: /\.js($|\?)/i
     })
   ],
   output: {
