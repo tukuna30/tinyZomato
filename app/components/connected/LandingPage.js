@@ -57,7 +57,7 @@ class LandingPage extends React.Component {
             if (this._isCityChanged(nextProps) || this._isCategoryChanged(nextProps)) {
                 this.setState({ isLoading: true });
                 this.props.actions.loadRestaurants(localStore.getCity().id, nextProps.selectedCategory.id).then(() => {
-                    this.setState({ isLoading: false, restaurants: nextProps.restaurants });
+                    this.setState({ isLoading: false});
                 });
             } else {
                 this.setState({ restaurants: nextProps.restaurants, isLoading: false });
