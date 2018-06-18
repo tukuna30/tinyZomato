@@ -9,5 +9,5 @@ let http = require('http').createServer(app);
 const port = process.env.PORT || 3000;
 http.listen(port, () => console.log(`Server running on port ${port}`));
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
