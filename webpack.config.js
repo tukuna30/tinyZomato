@@ -1,13 +1,8 @@
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  devtool: 'inline-source-map',
   plugins: [
-    new UglifyJSPlugin({
-      test: /\.js($|\?)/i
-    }),
     new HtmlWebpackPlugin({
       hash: true,
       template: 'app/templates/index.html',
@@ -40,14 +35,5 @@ module.exports = {
         }]
       }
     ]
-  },
-  watch: false,
-   watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000
-  },
-  mode: 'none',
-  devServer: {
-    port: 3000
   }
 };

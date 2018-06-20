@@ -15,13 +15,15 @@ import Categories from '../connected/Categories';
 class LandingPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { modalIsOpen: false, restaurant: {}, restaurants: [], showCityPicker: false, isLoading: true };
+        this.state = { modalIsOpen: false, restaurant: {}, restaurants: [], showCityPicker: false, isLoading: true, selectedCategory: {}, isFiltering: false };
         this.selectRestaurant = this.selectRestaurant.bind(this);
         this.showCityPicker = this.showCityPicker.bind(this);
         this.hideCityPicker = this.hideCityPicker.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.updateRestaurantsList = this.updateRestaurantsList.bind(this);
         this.sortRestaurantsList = this.sortRestaurantsList.bind(this);
+        this.loadMore = this.loadMore.bind(this);
+        this.resetFilter = this.resetFilter.bind(this);
     }
 
     selectRestaurant(restaurant) {
@@ -52,15 +54,22 @@ class LandingPage extends React.Component {
         return this.props.selectedCategory.id && this.props.selectedCategory.id !== nextProps.selectedCategory.id;
     }
 
+    loadMore () {
+        this.setState({ isLoading: true, isFiltering: false });
+        this.props.actions.loadRestaurants(localStore.getCity().id, this.state.selectedCategory.id, this.state.restaurants.length).then(() => {
+            this.setState({ isLoading: false});
+        });
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.restaurants) {
             if (this._isCityChanged(nextProps) || this._isCategoryChanged(nextProps)) {
                 this.setState({ isLoading: true });
-                this.props.actions.loadRestaurants(localStore.getCity().id, nextProps.selectedCategory.id).then(() => {
+                this.props.actions.loadRestaurants(localStore.getCity().id, nextProps.selectedCategory.id, 0, true).then(() => {
                     this.setState({ isLoading: false});
                 });
             } else {
-                this.setState({ restaurants: nextProps.restaurants, isLoading: false });
+                this.setState({ restaurants: nextProps.restaurants, isLoading: false, selectedCategory: nextProps.selectedCategory });
             }
         }
     }
@@ -69,7 +78,11 @@ class LandingPage extends React.Component {
         let filteredRestaurants = this.props.restaurants.filter((res) => {
             return parseFloat(res.restaurant.user_rating.aggregate_rating) >= parseFloat(rating);
         });
-        this.setState({ restaurants: filteredRestaurants, isLoading: false });
+        this.setState({ restaurants: filteredRestaurants, isLoading: false, isFiltering: true });
+    }
+
+    resetFilter () {
+        this.setState({isFiltering: false});
     }
 
     sortRestaurantsList(order) {
@@ -111,9 +124,9 @@ class LandingPage extends React.Component {
                     />
                     <div style={{ padding: '10px' }}>
                         <span>{this.props.selectedCity.name || localStore.getCity().name}</span>
-                        <button onClick={this.showCityPicker}>Change City</button>
+                        <button style={{marginLeft: '5px'}} onClick={this.showCityPicker}>Change City</button>
                     </div>
-                    <Filter onChange={this.updateRestaurantsList} />
+                    <Filter onChange={this.updateRestaurantsList} isFiltering={this.state.isFiltering} resetFilter={this.resetFilter}/>
                     <Sorter onSelection={this.sortRestaurantsList} />
                     <div>
                         <Categories onChange={this.getRestaurantsByCuisine} />
@@ -121,7 +134,8 @@ class LandingPage extends React.Component {
 
                 </div>
                 <div className='right'>
-                    <RestaurantsList isLoading={this.state.isLoading} restaurants={restaurants} selectRestaurant={this.selectRestaurant} />
+                    <RestaurantsList isLoading={this.state.isLoading} restaurants={restaurants} selectRestaurant={this.selectRestaurant} 
+                    loadMore={this.loadMore} isFiltering={this.state.isFiltering}/>
                     {this.state.showCityPicker && <CityPicker onClose={this.hideCityPicker} />}
                 </div>
                 <Modal

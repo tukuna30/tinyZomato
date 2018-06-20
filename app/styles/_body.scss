@@ -71,7 +71,7 @@
       }
       .restaurants-container {
           .right {
-              &>ul {
+              ul#list-container {
                   li {
                       &.first {
                           margin-top: 60px;
@@ -110,8 +110,7 @@
           z-index: 1;
           background: white;
           padding: 10px;
-          top: 30px;
-          min-width: 520px;
+          min-width: 800px;
       }
       .results-note {
           position: absolute;

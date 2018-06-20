@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.prod.js",
     "start": "node server.js",
-    "start-dev": "webpack --config webpack.config.js",
-    "postinstall": "webpack --config webpack.config.js"
+    "start-dev": "webpack --config webpack.dev.js",
+    "postinstall": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -22,14 +22,14 @@
   "homepage": "https://github.com/tukuna30/tinyZomato#readme",
   "dependencies": {
     "@material-ui/core": "^1.2.1",
-    "cookie": "^0.3.1",
+    "express": "^4.16.2",
+    "lodash.throttle": "^4.1.1",
     "prop-types": "^15.6.1",
     "react-modal": "^3.4.4",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0",
-    "express": "^4.16.2"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

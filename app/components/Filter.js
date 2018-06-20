@@ -4,18 +4,28 @@ class Filter extends React.Component {
     constructor(props) {
         super(props);
         this.handleOptionChange = this.handleOptionChange.bind(this);
+        this.resetFilter = this.resetFilter.bind(this);
         this.selectedRating = '';
     }
+
     handleOptionChange(event) {
         let value = event.target.value;
         this.selectedRating = value;
         this.props.onChange && this.props.onChange(value);
     }
+ 
+    resetFilter() {
+        this.selectedRating = '';
+        this.props.resetFilter();
+    }
 
     render() {
         return (
-            <div style={{padding: "10px"}}>
-                <div className='filter-head'>Filter by rating</div>
+            <div style={{ padding: "10px" }}>
+                <div className='filter-head'>
+                    Filter by Ratings
+                    {this.selectedRating && <button style={{marginLeft: '5px'}} onClick={this.resetFilter}>Reset</button>}
+                </div>
                 <div className="radio">
                     <label>
                         <input type="radio" value="4.5"
